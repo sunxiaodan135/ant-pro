@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import NProgress from "nprogress";
-import 'nprogress/nprogress.css'
+import "nprogress/nprogress.css";
 import NotFound from "../views/404.vue";
 Vue.use(VueRouter);
 
@@ -98,7 +98,7 @@ const routes = [
   {
     path: "*",
     name: "404",
-    component:NotFound,
+    component: NotFound,
   },
 ];
 const router = new VueRouter({
@@ -107,7 +107,9 @@ const router = new VueRouter({
   routes,
 });
 router.beforeEach((to, from, next) => {
-  NProgress.start();
+  if (to.path !== from.path) {
+    NProgress.start();
+  }
   next();
 });
 router.afterEach(() => {

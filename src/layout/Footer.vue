@@ -1,6 +1,6 @@
 <template>
   <div>
-    Fotter
+    Ant Design ©2020 Created by sunxiaodan
   </div>
 </template>
 
