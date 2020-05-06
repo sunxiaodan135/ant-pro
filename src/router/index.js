@@ -1,14 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import NProgress from "nprogress";
+import 'nprogress/nprogress.css'
+import NotFound from "../views/404.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
   {
     path: "/user",
     component: () =>
@@ -56,48 +53,64 @@ const routes = [
           },
         ],
       },
+      // forms
+      {
+        path: "/form",
+        name: "form",
+        component: { render: (h) => h("router-view") },
+        children: [
+          {
+            path: "/form/basic-form",
+            name: "basicform",
+            component: () => import("@/views/Forms/BasicForm"),
+          },
+          {
+            path: "/form/step-form",
+            name: "StepForm",
+            component: () => import("@/views/Forms/StepForm"),
+            children: [
+              {
+                path: "/form/step-form",
+                redirect: "/form/step-form/info",
+              },
+              {
+                path: "/form/step-form/info",
+                name: "info",
+                component: () => import("@/views/Forms/StepForm/Step1"),
+              },
+              {
+                path: "/form/step-form/confirm",
+                name: "confirm",
+                component: () => import("@/views/Forms/StepForm/Step2"),
+              },
+              {
+                path: "/form/step-form/result",
+                name: "result",
+                component: () => import("@/views/Forms/StepForm/Step3"),
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
-  // forms
+
   {
-    path: "/form",
-    redirect: "/form/base-form",
-    component: { render: (h) => h("router-view") },
-    children: [
-      {
-        path: "/form/base-form",
-        name: "BaseForm",
-        component: () => import("@/views/form/BasicForm"),
-      },
-      {
-        path: "/form/step-form",
-        name: "StepForm",
-        component: () => import("@/views/form/stepForm/StepForm"),
-        children: [],
-      },
-      {
-        path: "/form/advanced-form",
-        name: "AdvanceForm",
-        component: () => import("@/views/form/advancedForm/AdvancedForm"),
-        meta: { title: "高级表单", keepAlive: true, permission: ["form"] },
-      },
-    ],
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "*",
+    name: "404",
+    component:NotFound,
   },
 ];
-
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
 });
-
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
+});
+router.afterEach(() => {
+  NProgress.done();
+});
 export default router;

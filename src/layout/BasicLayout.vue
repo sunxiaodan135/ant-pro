@@ -1,14 +1,19 @@
 <template>
   <div>
-    <div class="desc">
-      Ant design Vue
-    </div>
-
+    <Header></Header>
+    <SiderMenu></SiderMenu>
     <router-view></router-view>
+    <Footer></Footer>
+    
   </div>
 </template>
 
 <script>
-export default {};
+import Header from './Header'
+import Footer from './Footer'
+import SiderMenu from './SiderMenu'
+export default {
+  components:{Header,Footer,SiderMenu}
+};
 </script>
 <style scoped></style>
