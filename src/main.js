@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import Authorized from './components/Authorized'
+import Auth from '@/directives/auth'
 //按需加载
 // Vue.config.productionTip = false;
 // import { Button } from 'ant-design-vue';
@@ -10,6 +11,9 @@ import Authorized from './components/Authorized'
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.less";
 Vue.use(Antd);
+//权限指令
+Vue.use(Auth);
+// 注册全局的权限组件
 Vue.component('Authorized',Authorized);
 new Vue({
   router,
