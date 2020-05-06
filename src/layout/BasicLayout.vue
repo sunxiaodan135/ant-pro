@@ -7,9 +7,10 @@
         :trigger="null"
         v-model="collapsed"
         collapsible
+        width="256px"
       >
-        <div class="logo">Ant design Vue</div>
-        <SiderMenu></SiderMenu>
+        <div class="logo">Ant design</div>
+        <SiderMenu :theme="navTheme"></SiderMenu>
       </a-layout-sider>
       <a-layout>
         <a-layout-header style="background: #fff; padding: 0;">
@@ -69,7 +70,7 @@ export default {
 #components-layout-demo-side .logo {
   height: 64px;
   font-weight: bold;
-  font-size:20px;
+  font-size:12px;
   line-height: 64px;
   text-align: center;
 
@@ -78,7 +79,7 @@ export default {
     background: #ffff;
     color: #000;
 }
-.nav-theme-dark{
+.nav-theme-dark >>> .logo{
   color: #ddd;
 }
 </style>
