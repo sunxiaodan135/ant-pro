@@ -1,6 +1,6 @@
 export function getCurrentAuthority(){
     //返回当前用户的身份
-    return ["user"];
+    return ["admin"];
 }
 //判断当前权限是否包含在某权限
 export function check(authority){

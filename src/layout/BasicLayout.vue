@@ -29,7 +29,10 @@
         </a-layout-footer>
       </a-layout>
     </a-layout>
+    <!-- 只有管理员可以设置样式和布局 -->
+    <Authorized :authority="['admin']">
     <SettingDrawer />
+    </Authorized>
   </div>
 </template>
 
