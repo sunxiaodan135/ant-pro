@@ -1,15 +1,17 @@
 <template>
-  <div :class="[`nav-theme-${navTheme}`,`nav-layout-${navLayout}`]">
+  <div :class="[`nav-theme-${navTheme}`, `nav-layout-${navLayout}`]">
     <a-layout id="components-layout-demo-side" style="min-height: 100vh;">
       <a-layout-sider
-        v-if="navLayout=== 'left'"
+        v-if="navLayout === 'left'"
         :theme="navTheme"
         :trigger="null"
         v-model="collapsed"
         collapsible
         width="256px"
       >
-        <div class="logo">Ant design</div>
+        <div class="logocontainer">
+          <div class="logo"></div><div :class="{ 'logotitle':true, 'titledisplay': collapsed}">Vue Design pro</div>
+        </div>
         <SiderMenu :theme="navTheme"></SiderMenu>
       </a-layout-sider>
       <a-layout>
@@ -32,7 +34,7 @@
     </a-layout>
     <!-- 只有管理员可以设置样式和布局利用全局组件 -->
     <Authorized :authority="['admin']">
-    <SettingDrawer />
+      <SettingDrawer />
     </Authorized>
   </div>
 </template>
@@ -72,18 +74,33 @@ export default {
 }
 
 #components-layout-demo-side .logo {
-  height: 64px;
-  font-weight: bold;
-  font-size:12px;
-  line-height: 64px;
+  height: 54px;
+  width: 54px;
+  background-image: url("../assets/logo.png") ;
+  background-size:100% 100%;
   text-align: center;
-
 }
-.nav-theme-light >>> .logo{
-    background: #ffff;
-    color: #000;
+.nav-theme-light >>> .logotitle {
+  margin-left:10px ;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: bold;
+  background: #ffff;
+  color: #000;
 }
-.nav-theme-dark >>> .logo{
+.nav-theme-dark >>> .logotitle {
   color: #ddd;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left:10px ;
+}
+.logocontainer{
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.titledisplay{
+  display: none;
 }
 </style>
